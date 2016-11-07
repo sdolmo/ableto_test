@@ -10,10 +10,17 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+//
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', 'HomeController@index');
 
 
+Route::resource('questions', 'QuestionsController');
+
+
+Route::auth();
+
+//Route::get('chartjs', 'HomeController@chartjs');
