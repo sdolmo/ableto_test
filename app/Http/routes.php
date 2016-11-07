@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index');
 
 
+//Route::get('questions/create/{id}', 'QuestionsController@create_id');
+
+
 Route::resource('questions', 'QuestionsController');
 
 

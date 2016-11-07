@@ -9,17 +9,25 @@
     {{ Form::open(['url' => 'questions']) }}
         @foreach ($questions as $ask)
 
+            <div class="form-group">
+                <h1> {{  $ask->question  }} </h1>
+            </div>
 
-           <h1> {{  $ask->question  }} </h1>
+            <div class="form-group">
+                @foreach ($answers as $option)
 
-            {{--{{ Form::radio('result', '1' ); }}--}}
-            {{--{{ Form::radio('result', '2' ); }}--}}
-            {{--{{ Form::radio('result', '3' ); }}--}}
-            {{--{{ Form::radio('result', '4' ); }}--}}
-            {{--{{ Form::radio('result', '5' ); }}--}}
+                    {{ Form::label($option->answer ) }}
+                    {{ Form::radio($ask->id, $option->answer, ['class' => 'radio-inline']) }}
 
+                @endforeach
+            </div>
 
         @endforeach
+
+        <div class="form-group">
+            {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
+        </div>
+
     {{ Form::close() }}
 
 @stop

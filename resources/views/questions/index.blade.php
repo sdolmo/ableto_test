@@ -6,12 +6,8 @@
 
     <hr/>
 
-    @foreach ($questions as $question)
-        <article>
-            <h2>
-                <a href="{{url('/questions', $question->id)}}">{{$question->question}}</a>
-            </h2>
-        </article>
-    @endforeach
+
+    {!! $chart->render() !!}
+
 
 @stop

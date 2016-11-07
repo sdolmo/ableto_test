@@ -3,25 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
-use Illuminate\Http\Request;
 use App\Question;
-use App\Http\Requests;
+use App\Data;
+use App\User;
+use Charts;
+use App\HttpResponse;
+use App\Http\Requests\CreateChart;
+use Illuminate\Http\Request;
+
+
 
 class QuestionsController extends Controller
 {
     public function index() {
-        $questions = Question::all();
 
-        return view('questions.index', compact('questions'));
+        $chart = Charts::database(Data::all(), 'bar', 'highcharts')
+                        ->setResponsive(false)
+                        ->groupBy('3')
+                        ->setWidth(0);
+//                        ->setLables(['Q1', 'Q2', 'Q3', 'Q4']);
+
+
+        return view('questions.index', ['chart' => $chart]);
     }
 
 //    Create is where the user will answer the questions
-//    public function create() {
-//
-//        $questions = Question::all();
-//
-//        return view('questions.create', compact('questions', 'answer'));
-//    }
+    public function create() {
+
+        $questions = Question::all();
+        $answers = Answer::all();
+
+        return view('questions.create', compact('questions', 'answers'));
+    }
 
     /**
      * @return string
@@ -34,11 +47,11 @@ class QuestionsController extends Controller
 
     }
 
-    public function edit($id)
+    public function store(Request $request)
     {
-        $questions = Question::find($id);
-        $answers = Answer::all();
 
-        return view('questions.create', compact('questions', 'answers'));
+        Data::create($request->all());
+
+        return redirect('questions');
     }
 }

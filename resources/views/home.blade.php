@@ -12,8 +12,9 @@
                         Ready to take the quiz? Click the button below
                     </p>
 
-                    <button href="#">Let's go!</button>
+                    <a href="{{ url('/questions/create') }}"><button>Let's go!</button></a>
                 </div>
+
             </div>
         </div>
     </div>
